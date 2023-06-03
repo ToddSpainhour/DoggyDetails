@@ -1,0 +1,1 @@
+console.log("If you see this your javascript file is connected.");
