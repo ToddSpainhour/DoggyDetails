@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using DoggyDetails.Models;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace DoggyDetails.Controllers
 {
@@ -55,13 +56,17 @@ namespace DoggyDetails.Controllers
         // check username availability
         [HttpGet]
         [Route("UsernameAvailability/{userEnteredUsername}")]
-        public string CheckUsernameAvailability()
+        public string CheckUsernameAvailability(string userEnteredUsername)
         {
             // accept argument from frontend (username)
             // pass that argument into query
             // if any query results > 0, username IS NOT available
             // if query results == 0, username IS available
             // how to stop query if a result is found??
+
+            var db = new SqlConnection(_configuration.GetConnectionString("DoggyDetailsConnectionString").ToString());
+            SqlDataAdapter da = new SqlDataAdapter("select * from Owner", con);
+
         }
     }
 }
