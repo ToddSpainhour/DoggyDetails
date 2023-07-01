@@ -56,17 +56,28 @@ namespace DoggyDetails.Controllers
         // check username availability
         [HttpGet]
         [Route("UsernameAvailability/{userEnteredUsername}")]
-        public string CheckUsernameAvailability(string userEnteredUsername)
+        public bool CheckUsernameAvailability(string userEnteredUsername)
         {
-            // accept argument from frontend (username)
-            // pass that argument into query
-            // if any query results > 0, username IS NOT available
-            // if query results == 0, username IS available
-            // how to stop query if a result is found??
+            
+            using var con = new SqlConnection(_configuration.GetConnectionString("DoggyDetailsConnectionString").ToString());
 
-            var db = new SqlConnection(_configuration.GetConnectionString("DoggyDetailsConnectionString").ToString());
-            SqlDataAdapter da = new SqlDataAdapter("select * from Owner", con);
+            var queryString = @"select case when exists 
+                (select AccountEmail from[Owner]
+                where AccountEmail = @ueun)
+                then cast(0 as bit)
+                else cast(1 as bit)
+                end";
 
+            var command = new SqlCommand(queryString, con);
+            var parameter = new SqlParameter("@ueun", userEnteredUsername);
+            command.Parameters.Add(parameter);
+            IDbDataAdapter runQueryAndGetResults = new SqlDataAdapter(command);
+            DataSet ds = new DataSet();
+            runQueryAndGetResults.Fill(ds);
+            var result = ds.Tables[0].Rows[0];
+            var isUserNameAvailable = result.Field<bool>(0);
+
+            return isUserNameAvailable;
         }
     }
 }
