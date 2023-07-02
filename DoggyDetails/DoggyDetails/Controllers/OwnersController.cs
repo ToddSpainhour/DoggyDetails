@@ -56,9 +56,8 @@ namespace DoggyDetails.Controllers
         // check username availability
         [HttpGet]
         [Route("UsernameAvailability/{userEnteredUsername}")]
-        public bool CheckUsernameAvailability(string userEnteredUsername)
-        {
-            
+        public string CheckUsernameAvailability(string userEnteredUsername)
+        { 
             using var con = new SqlConnection(_configuration.GetConnectionString("DoggyDetailsConnectionString").ToString());
 
             var queryString = @"select case when exists 
@@ -75,9 +74,19 @@ namespace DoggyDetails.Controllers
             DataSet ds = new DataSet();
             runQueryAndGetResults.Fill(ds);
             var result = ds.Tables[0].Rows[0];
-            var isUserNameAvailable = result.Field<bool>(0);
+            var isUserNameAvailable = result.Field<bool>(0).ToString();
 
-            return isUserNameAvailable;
+            if (isUserNameAvailable ==  "False")
+            {
+                return "False";
+            } 
+            else if (isUserNameAvailable == "True")
+            {
+                return "True";
+            } else
+            {
+                return "False";
+            }
         }
     }
 }
