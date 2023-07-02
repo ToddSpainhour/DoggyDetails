@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using DoggyDetails.Models;
 using Newtonsoft.Json;
+using System.Text.Json;
 using System.Linq;
 
 namespace DoggyDetails.Controllers
@@ -87,6 +88,42 @@ namespace DoggyDetails.Controllers
             {
                 return "False";
             }
+        }
+
+        [HttpPost]
+        [Route("createNewOwner/{newOwner}")]
+        public object CreateNewOwner([FromBody]Owner newOwner)
+        {
+            Owner newOwnerToInsert = new Owner();
+
+            newOwnerToInsert.FirstName = newOwner.FirstName;
+            newOwnerToInsert.LastName = newOwner.LastName;
+            newOwnerToInsert.AccountEmail = newOwner.AccountEmail;
+            newOwnerToInsert.AccountPassword = newOwner.AccountPassword;
+
+            using var con = new SqlConnection(_configuration.GetConnectionString("DoggyDetailsConnectionString").ToString());
+
+            var queryString = @"insert into [Owner]
+                                values(@FirstName, @LastName, @AccountEmail, @AccountPassword) 
+                                SELECT SCOPE_IDENTITY();";
+
+            var command = new SqlCommand(queryString, con);
+
+            var firstName = new SqlParameter("@FirstName", newOwnerToInsert.FirstName);
+            var lastName = new SqlParameter("@LastName", newOwnerToInsert.LastName);
+            var accountEmail = new SqlParameter("@AccountEmail", newOwnerToInsert.AccountEmail);
+            var accountPassword = new SqlParameter("@AccountPassword", newOwnerToInsert.AccountPassword);
+
+            command.Parameters.Add(firstName);
+            command.Parameters.Add(lastName);
+            command.Parameters.Add(accountEmail);
+            command.Parameters.Add(accountPassword);
+
+            con.Open();
+            var returnedOwnerID = command.ExecuteScalar();
+            con.Close();
+
+            return returnedOwnerID;
         }
     }
 }

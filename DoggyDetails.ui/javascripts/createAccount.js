@@ -26,10 +26,38 @@ const CheckUsernameAvailability = async () =>
     changeUsernameUnavailableVisability(isUsernameAvailabile);
 }
 
+const createNewOwner = async () => {
+
+    const newOwner = {
+        firstName: "Heather",
+        lastName: "Wood",
+        accountEmail: "heather@test.com",
+        accountPassword: "password"
+    }
+
+    const reponse = await fetch(`https://localhost:7260/api/Owners/createNewOwner/${newOwner}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newOwner),
+    });
+
+    const result = await response.json();
+    console.log("Success:", result);
+    //console.log("responseAsText: ", responseAsText);
+    
+    // method: "Post",
+    // headers: {"Content-Type": "application/json"},
+    // data: JSON.stringify:({password, firstName, lastName})
+    // }
+}
+
 const addEventListeners = () => 
 {
     btnCheckUsernameAvailability = document.getElementById("btnCheckUsernameAvailability");
     btnCheckUsernameAvailability.addEventListener("click", CheckUsernameAvailability);
+    btnCreateNewOwner.addEventListener("click", createNewOwner);
 }
 
 const init = () => 
