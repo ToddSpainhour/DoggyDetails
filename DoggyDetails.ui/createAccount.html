@@ -7,6 +7,7 @@
     <title>Create Account</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/createAccount.css">
 </head>
 <body>
     <nav-bar></nav-bar>
@@ -15,7 +16,18 @@
     
         <input id="username" type="text">
         <button id="btnCheckUsernameAvailability">Check Availability</button>
-            <p id="usernameAlreadyTakenMessage">blank</p>
+        <p id="usernameAlreadyTakenMessage">blank</p>
+
+        <div id="createAccountInputContainer">
+            <label for="passwordInput">Pick a password</label>
+            <input id="passwordInput" type="text">
+
+            <label for="FirstName">First Name</label>
+            <input id="firstName" type="text">
+
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text">
+        </div>
         
 
     <script src="javascripts/navbar.js"></script>

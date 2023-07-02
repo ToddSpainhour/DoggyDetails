@@ -2,14 +2,17 @@
 const changeUsernameUnavailableVisability = (dbResponse) => 
 {
     const usernameAlreadyTakenMessage = document.getElementById("usernameAlreadyTakenMessage");
+    const createAccountInputContainer = document.getElementById("createAccountInputContainer");
     
     if (dbResponse == "False")
     {
         usernameAlreadyTakenMessage.innerHTML = "That username is not available. Try again"
+        createAccountInputContainer.style.display = "none";
     } 
     else 
     {
         usernameAlreadyTakenMessage.innerHTML = "Great. Let's keep going!"
+        createAccountInputContainer.style.display = "block";
     }
 }
 
