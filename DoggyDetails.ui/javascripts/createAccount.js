@@ -28,11 +28,16 @@ const CheckUsernameAvailability = async () =>
 
 const createNewOwner = async () => {
 
+    const username = document.getElementById('username').value
+    const password = document.getElementById('passwordInput').value
+    const firstName = document.getElementById('firstName').value
+    const lastName = document.getElementById('lastName').value
+
     const newOwner = {
-        firstName: "Heather",
-        lastName: "Wood",
-        accountEmail: "heather@test.com",
-        accountPassword: "password"
+        firstName: firstName,
+        lastName: lastName,
+        accountEmail: username,
+        accountPassword: password
     }
 
     const reponse = await fetch(`https://localhost:7260/api/Owners/createNewOwner/${newOwner}`, {
