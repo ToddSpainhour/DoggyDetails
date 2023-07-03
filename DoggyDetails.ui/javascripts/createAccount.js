@@ -40,7 +40,7 @@ const createNewOwner = async () => {
         accountPassword: password
     }
 
-    const reponse = await fetch(`https://localhost:7260/api/Owners/createNewOwner/${newOwner}`, {
+    const response = await fetch(`https://localhost:7260/api/Owners/createNewOwner/${newOwner}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -48,14 +48,13 @@ const createNewOwner = async () => {
           body: JSON.stringify(newOwner),
     });
 
-    const result = await response.json();
-    console.log("Success:", result);
-    //console.log("responseAsText: ", responseAsText);
-    
-    // method: "Post",
-    // headers: {"Content-Type": "application/json"},
-    // data: JSON.stringify:({password, firstName, lastName})
-    // }
+    const result = await response.text();
+    document.cookie = `OwnerID=${result};`;
+    pushToDashboard();
+}
+
+const pushToDashboard = () => {
+    window.location.replace('./dashboard.html');
 }
 
 const addEventListeners = () => 
