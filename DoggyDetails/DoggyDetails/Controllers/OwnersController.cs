@@ -125,5 +125,45 @@ namespace DoggyDetails.Controllers
 
             return returnedOwnerID;
         }
+
+        [HttpPost]
+        [Route("login/{loginInfo}")]
+
+        public int OwnerLogin([FromBody] Owner loginInfo)
+        {
+            Owner owner = new Owner();
+
+            owner.AccountEmail = loginInfo.AccountEmail;
+            owner.AccountPassword = loginInfo.AccountPassword;
+
+            using var con = new SqlConnection(_configuration.GetConnectionString("DoggyDetailsConnectionString").ToString());
+
+            var queryString = @"select case when exists 
+                                (select [Owner].AccountEmail from [Owner]
+                                where @AccountEmail = @AccountEmail AND AccountPassword = @AccountPassword)
+                                then (select OwnerID from Owner where AccountEmail = @AccountEmail AND AccountPassword = @AccountPassword)
+                                else (0)
+                                end";
+
+            var command = new SqlCommand(queryString, con);
+
+            var accountEmail = new SqlParameter("@AccountEmail", owner.AccountEmail);
+            var accountPassword = new SqlParameter("@AccountPassword", owner.AccountPassword);
+
+            command.Parameters.Add(accountEmail);
+            command.Parameters.Add(accountPassword);
+
+            con.Open();
+            var returnedOwnerID = command.ExecuteScalar();
+            con.Close();
+
+            if (returnedOwnerID == DBNull.Value)
+            {
+                returnedOwnerID = 0;
+            } 
+
+            var ownerID = Convert.ToInt32(returnedOwnerID);
+            return ownerID;
+        }
     }
 }

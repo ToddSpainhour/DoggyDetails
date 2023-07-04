@@ -37,3 +37,7 @@ a {
     color: yellow;
     height: auto;
 }
+
+#logout-button-container {
+    display: none;
+}
