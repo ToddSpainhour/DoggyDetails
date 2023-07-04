@@ -10,7 +10,7 @@ const getAllOwners = async () =>
 
 const addEventListeners = () => 
 {
-    getAllOwnersButton = document.getElementById("getAllOwners");
+    const getAllOwnersButton = document.getElementById("btnGetAllOwners");
     getAllOwnersButton.addEventListener("click", getAllOwners);
 }
 
