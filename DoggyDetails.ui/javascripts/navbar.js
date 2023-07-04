@@ -13,8 +13,11 @@ class NavBar extends HTMLElement
                 <div>
                     <a href="index.html" class="navbar-element">Welcome</a>
                 </div>
-                <div>
+                <div id="create-account-button-container">
                     <a href="createAccount.html" class="navbar-element">Create Account</a>
+                </div>
+                <div id="logout-button-container">
+                    <button id="btnLogout" class="navbar-element">Logout</button>
                 </div>
             </div>
         </nav>`
@@ -22,3 +25,16 @@ class NavBar extends HTMLElement
 }
 
 window.customElements.define('nav-bar', NavBar);
+
+const logoutBtnClick = () => {
+    document.cookie = "OwnerID=0";
+    window.location.replace('./index.html');
+}
+
+const addNavbarEventListeners = () => 
+{
+    const btnLogout = document.getElementById("btnLogout");
+    btnLogout.addEventListener("click", logoutBtnClick);
+}
+
+addNavbarEventListeners();

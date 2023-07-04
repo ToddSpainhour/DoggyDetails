@@ -38,8 +38,13 @@ const AttemptLogin = async () =>
 
     const result = await response.text();
     console.log(`result: ${result}`)
+    document.cookie = `OwnerID=${result};`;
+    pushToDashboard();
 }
 
+const pushToDashboard = () => {
+    window.location.replace('./dashboard.html');
+}
 
 const addEventListeners = () => 
 {
