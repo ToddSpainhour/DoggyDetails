@@ -1,7 +1,7 @@
 
 const getNotesForThisPet = async (petID) =>
 {
-    // hit getMedicinesForThisPet endpoint
+    // hit getNotesForThisPet endpoint
 }
 
 const addNewNote = async (noteDetails) =>
