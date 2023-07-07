@@ -1,3 +1,4 @@
+import { baseUrl } from './helpers/constants.js'
 
 class LoginComponent extends HTMLElement 
 {
@@ -28,7 +29,8 @@ const AttemptLogin = async () =>
         accountPassword: accountPassword,
     }
 
-    const response = await fetch(`https://localhost:7260/api/Owners/login/${loginInfo}`, {
+    const response = await fetch(`${baseUrl}/Owners/login/${loginInfo}`, {
+
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -36,9 +38,8 @@ const AttemptLogin = async () =>
           body: JSON.stringify(loginInfo),
     });
 
-    const result = await response.text();
-    console.log(`result: ${result}`)
-    document.cookie = `OwnerID=${result};`;
+    const OwnerID = await response.text();
+    document.cookie = `OwnerID=${OwnerID};`;
     pushToDashboard();
 }
 
