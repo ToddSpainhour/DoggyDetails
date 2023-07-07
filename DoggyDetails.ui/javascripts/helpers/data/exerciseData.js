@@ -19,4 +19,4 @@ const deleteExercise = (exerciseID) =>
     // hit deleteExercise endpoint
 }
 
-export {getExercisesForThisPet, addNewExercise, editExercise, deleteExercise}
+export default { getExercisesForThisPet, addNewExercise, editExercise, deleteExercise }

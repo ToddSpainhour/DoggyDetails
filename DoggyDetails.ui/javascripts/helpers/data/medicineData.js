@@ -19,4 +19,4 @@ const deleteMedicine = (medicineID) =>
     // hit deleteMedicine endpoint
 }
 
-export {getMedicinesForThisPet, addNewMedicine, editMedicine, deleteMedicine}
+export default { getMedicinesForThisPet, addNewMedicine, editMedicine, deleteMedicine }

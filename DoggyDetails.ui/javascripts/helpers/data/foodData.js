@@ -19,4 +19,4 @@ const deleteFood = (foodID) =>
     // hit deleteFood endpoint
 }
 
-export {getFoodsForThisPet, createNewFood, editFood, deleteFood}
+export default { getFoodsForThisPet, createNewFood, editFood, deleteFood }

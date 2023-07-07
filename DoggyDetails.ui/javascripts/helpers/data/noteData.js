@@ -19,4 +19,4 @@ const deleteNote = (noteID) =>
     // hit deleteNote endpoint
 }
 
-export {getNotesForThisPet, addNewNote, editNote, deleteNote}
+export default { getNotesForThisPet, addNewNote, editNote, deleteNote }
