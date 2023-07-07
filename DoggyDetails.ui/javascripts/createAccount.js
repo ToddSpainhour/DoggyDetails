@@ -1,4 +1,6 @@
 
+import { baseUrl } from './helpers/constants.js'
+
 const changeUsernameUnavailableVisability = (dbResponse) => 
 {
     const usernameAlreadyTakenMessage = document.getElementById("usernameAlreadyTakenMessage");
@@ -19,7 +21,7 @@ const changeUsernameUnavailableVisability = (dbResponse) =>
 const CheckUsernameAvailability = async () => 
 {
     const userEnteredValue = document.getElementById("username").value;
-    const url = `https://localhost:7260/api/Owners/UsernameAvailability/${userEnteredValue}`
+    const url = `${baseUrl}/Owners/UsernameAvailability/${userEnteredValue}`
     let response = await fetch(url);
     let responseAsText = await response.text();
     const isUsernameAvailabile = responseAsText;
@@ -40,7 +42,7 @@ const createNewOwner = async () => {
         accountPassword: password
     }
 
-    const response = await fetch(`https://localhost:7260/api/Owners/createNewOwner/${newOwner}`, {
+    const response = await fetch(`${baseUrl}/Owners/createNewOwner/${newOwner}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -59,8 +61,10 @@ const pushToDashboard = () => {
 
 const addEventListeners = () => 
 {
-    btnCheckUsernameAvailability = document.getElementById("btnCheckUsernameAvailability");
+    const btnCheckUsernameAvailability = document.getElementById("btnCheckUsernameAvailability");
     btnCheckUsernameAvailability.addEventListener("click", CheckUsernameAvailability);
+
+    const btnCreateNewOwner = document.getElementById("btnCreateNewOwner")
     btnCreateNewOwner.addEventListener("click", createNewOwner);
 }
 

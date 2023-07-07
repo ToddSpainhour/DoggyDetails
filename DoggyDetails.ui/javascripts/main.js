@@ -1,8 +1,8 @@
+import { baseUrl } from './helpers/constants.js'
 
 const getAllOwners = async () => 
 {
-    console.log("you clicked the button");
-    const url = "https://localhost:7260/api/Owners/GetAllOwners";
+    const url = `${baseUrl}/Owners/GetAllOwners`;
     let response = await fetch(url);
     let ownersAsText = await response.text();
     console.log(ownersAsText);
