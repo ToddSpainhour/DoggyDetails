@@ -1,8 +1,8 @@
-import petData from './helpers/petData';
-import exerciseData from './helpers/exerciseData';
-import foodData from './helpers/foodData';
-import medicineData from './helpers/medicineData';
-import noteData from './helpers/noteData';
+import petData from './helpers/data/petData.js'
+import exerciseData from './helpers/data/exerciseData.js'
+import foodData from './helpers/data/foodData.js';
+import medicineData from './helpers/data/medicineData.js';
+import noteData from './helpers/data/noteData.js';
 
 
 const changeCreateAccountButtonVisibility = () => 
