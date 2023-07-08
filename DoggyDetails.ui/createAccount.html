@@ -14,19 +14,21 @@
     <p>Create Account Page</p>
     <p>Enter a username or email below to check if it's available!</p>
     
-        <input id="username" type="text">
+        <input id="username" type="text" maxlength="50">
+        <p id="noUsernameErrorMessage" class="error-message hidden">Please enter a username to continue</p>
         <button id="btnCheckUsernameAvailability">Check Availability</button>
         <p id="usernameAlreadyTakenMessage">blank</p>
 
         <div id="createAccountInputContainer">
             <label for="passwordInput">Pick a password</label>
-            <input id="passwordInput" type="text">
+            <input id="passwordInput" type="text" maxlength="50">
 
             <label for="firstName">First Name</label>
-            <input id="firstName" type="text">
+            <input id="firstName" type="text" maxlength="50">
 
             <label for="lastName">Last Name</label>
-            <input id="lastName" type="text">
+            <input id="lastName" type="text" maxlength="50">
+            <p id="noPasswordErrorMessage" class="error-message hidden">Please enter a password to continue</p>
 
             <button id="btnCreateNewOwner">Create Account!</button>
         </div>
