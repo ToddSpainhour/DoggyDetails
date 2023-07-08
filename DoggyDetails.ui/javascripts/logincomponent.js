@@ -1,4 +1,5 @@
 import { baseUrl } from './helpers/constants.js'
+import OwnerIDData from './helpers/data/OwnerIDData.js';
 
 class LoginComponent extends HTMLElement 
 {
