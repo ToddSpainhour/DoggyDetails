@@ -7,3 +7,11 @@ body {
 p {
     color: limegreen;
 }
+
+.error-message {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
