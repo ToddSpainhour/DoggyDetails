@@ -204,5 +204,51 @@ namespace DoggyDetails.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        [Route("getAllPetsForThisOwner/{ownerInfo}")]
+        public List<Pet> GetAllPetsForThisOwner(Pet ownerInfo)
+        {
+            Pet pet = new Pet();
+            pet.OwnerID = ownerInfo.OwnerID;
+
+            using var con = new SqlConnection(_configuration.GetConnectionString("DoggyDetailsConnectionString").ToString());
+
+            try
+            {
+                var queryString = @"select PetID, OwnerId, Name, Type
+                                    from Pet
+                                    where @OwnerID = ownerID";
+
+                var command = new SqlCommand(queryString, con);
+
+                var ownerIDparameter = new SqlParameter("@OwnerID", pet.OwnerID);
+                command.Parameters.Add(ownerIDparameter);
+
+                con.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                
+
+                List<Pet> thisOwnersPets = new List<Pet>();
+
+                while (reader.Read())
+                {
+                    Pet myPet = new Pet();
+                    myPet.PetID = (int)reader["PetID"];
+                    myPet.OwnerID = (int)reader["OwnerID"];
+                    myPet.Name = reader["Name"].ToString();
+                    myPet.Type = reader["Type"].ToString();
+
+                    thisOwnersPets.Add(myPet);                
+                }
+                con.Close();
+                return thisOwnersPets;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Oh, no! Something went wrong in the GetAllPetsForThisOwner method. Error Info: {ex}");
+                throw;
+            }
+        }
     }
 }
