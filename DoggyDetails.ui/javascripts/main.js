@@ -12,7 +12,7 @@ const getAllOwners = async () =>
     } 
     catch (err) 
     {
-        console.log(`Oh, no! Something went wrong in the getAllOwners function. Error Info: ${err}`) 
+        console.log(`Oh, no! Something went wrong in the getAllOwners function. Error Info: ${err.message}`) 
     }
 
 }

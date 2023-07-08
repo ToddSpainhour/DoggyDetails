@@ -7,23 +7,13 @@ const getOwnerIDCookie = () =>
            if(e.includes("OwnerID")) 
            {
             OwnerIDFromCookies = e.split('=')[1]
+           } 
+           else 
+           {
+            OwnerIDFromCookies = "0"
            }
         })
-      console.log(`the cookie value is: ${OwnerIDFromCookies}`);      
-
-    if(OwnerIDFromCookies == null || value == 0)
-    {
-        console.log("you're logged out");
-        //
-    } 
-    else 
-    {
-        console.log("the OwnerID value is not zero or null so you must be logged in");
-        console.log(`OwnerID: ${value}`)
-        // show logout btn
-        // hide create account
-        // hide login component
-    }
+    return OwnerIDFromCookies; 
 }
 
 export default { getOwnerIDCookie }
