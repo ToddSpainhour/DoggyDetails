@@ -6,10 +6,15 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/petCard.css">
+
 </head>
 <body>
     <nav-bar></nav-bar>
     <p>dashboard for authenticated users</p>
+    <div id="petCardsContainer">
+        <p id="noPetsInDatabaseMessage" class="error-message">You Have no pets in the database!</p>
+    </div>
     <script src="javascripts/navbar.js"></script>
     <script src="javascripts/dashboard.js" type="module"></script>
 </body>
