@@ -32,7 +32,7 @@ try
 } 
 catch(err)
 {
-    console.log(`Oh, no! Something went wrong in the CheckUsernameAvailability function. Error Info: ${err}`)
+    console.log(`Oh, no! Something went wrong in the CheckUsernameAvailability function. Error Info: ${err.message}`)
 }
 
 
@@ -69,7 +69,7 @@ const createNewOwner = async () => {
     } 
     catch (err) 
     {
-        console.log(`Oh, no! Something went wrong in the CheckUsernameAvailability function. Error Info: ${err}`)
+        console.log(`Oh, no! Something went wrong in the CheckUsernameAvailability function. Error Info: ${err.message}`)
     }
 
 

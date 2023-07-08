@@ -46,7 +46,7 @@ const AttemptLogin = async () =>
     } 
     catch (err) 
     {
-        console.log(`Oh, no! Something went wrong in the AttemptLogin function. Error Info: ${err}`) 
+        console.log(`Oh, no! Something went wrong in the AttemptLogin function. Error Info: ${err.message}`) 
     } 
 }
 
