@@ -1,15 +1,48 @@
+@import "_variables.css";
+
+html {
+    background-color: var(--light);
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
 
 body {
-    background-color:lavender;
     font-family: Tahoma, Verdana, sans-serif;
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
+    background-color: var(--whiteish);
+    margin: 20px;
+}
+
+main {
+    padding: 5%;
+}
+
+button {
+    background-color: var(--yellow);
+    padding: 10px;
+    border-radius: 10px;
+    border-style: none;
+    color: var(--dark-blue)
+}
+
+button:hover{
+    background-color: var(--light-blue);
+    color: var(--whiteish)
 }
 
 p {
-    color: limegreen;
+    color: var(--dark-blue);
+}
+
+label {
+    color: var(--dark-blue)
 }
 
 .error-message {
-    color: red;
+    color: var(--red);
 }
 
 .hidden {
