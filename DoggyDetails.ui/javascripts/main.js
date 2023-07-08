@@ -3,9 +3,18 @@ import { baseUrl } from './helpers/constants.js'
 const getAllOwners = async () => 
 {
     const url = `${baseUrl}/Owners/GetAllOwners`;
-    let response = await fetch(url);
-    let ownersAsText = await response.text();
-    console.log(ownersAsText);
+
+    try 
+    {
+        let response = await fetch(url);
+        let ownersAsText = await response.text();
+        console.log(ownersAsText);
+    } 
+    catch (err) 
+    {
+        console.log(`Oh, no! Something went wrong in the getAllOwners function. Error Info: ${err}`) 
+    }
+
 }
 
 const addEventListeners = () => 

@@ -29,18 +29,25 @@ const AttemptLogin = async () =>
         accountPassword: accountPassword,
     }
 
-    const response = await fetch(`${baseUrl}/Owners/login/${loginInfo}`, {
+    try 
+    {
+        const response = await fetch(`${baseUrl}/Owners/login/${loginInfo}`, {
 
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(loginInfo),
-    });
-
-    const OwnerID = await response.text();
-    document.cookie = `OwnerID=${OwnerID};`;
-    pushToDashboard();
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(loginInfo),
+        });
+    
+        const OwnerID = await response.text();
+        document.cookie = `OwnerID=${OwnerID};`;
+        pushToDashboard();
+    } 
+    catch (err) 
+    {
+        console.log(`Oh, no! Something went wrong in the AttemptLogin function. Error Info: ${err}`) 
+    } 
 }
 
 const pushToDashboard = () => {
