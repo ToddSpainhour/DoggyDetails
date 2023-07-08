@@ -6,7 +6,6 @@ import noteData from './helpers/data/noteData.js';
 import ownerIdData from './helpers/data/OwnerIDData.js';
 import { baseUrl } from './helpers/constants.js'
 
-
 const checkAuthenticationStatus = async () => 
 {
     
@@ -55,7 +54,31 @@ const getPetsForThisOwner = async () =>
         });
     
         const listOfPets = await response.text();
-        console.log(`listOfPets: ${listOfPets}`)
+        let parsedListOfPets = JSON.parse(listOfPets)
+
+        const noPetsInDatabaseMessage = document.getElementById("noPetsInDatabaseMessage")
+
+        if(parsedListOfPets.length == 0) 
+        {
+            noPetsInDatabaseMessage.style.display = "block"
+        } 
+        else 
+        {
+            noPetsInDatabaseMessage.style.display = "none"
+
+            for (let i = 0; i < parsedListOfPets.length; i++)
+            {
+                let petCardsContainer = document.getElementById("petCardsContainer");
+    
+                let singlePetCard = `<div class="pet-card">`
+                singlePetCard += `<p>${parsedListOfPets[i].name}</p>`
+                singlePetCard += `<p>${parsedListOfPets[i].type}</p>`
+                singlePetCard += `<p>PetID: ${parsedListOfPets[i].petID}</p>`
+                singlePetCard += `</div>`
+    
+                petCardsContainer.innerHTML += singlePetCard;
+            }
+        }
     } 
     catch (err) 
     {
