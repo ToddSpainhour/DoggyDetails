@@ -5,12 +5,18 @@ values ('Todd', 'Spainhour', 'todd@test.com', 'password')
 select *
 from [Owner]
 
+select *
+from Pet
+
+insert into Pet
+values (1, 'Ranger', 'Dog')
+
 update [Owner]
 set AccountEmail = 'cindy@test.com'
 where OwnerId = 1
 
 delete from [Owner]
-where OwnerID between 14 and 16
+where OwnerID between 33 and 33
 
 select *
 from Pet
@@ -51,7 +57,7 @@ values (2, 'had a good walk')
 
 select *
 from Owner
-*/
+
 -- query Owner table, see if username already exists
 declare @userSupliedEmailAddress varchar(50)
 set @userSupliedEmailAddress = 'todd@test.com'
@@ -65,11 +71,20 @@ then cast(0 as bit)
 else cast(1 as bit)
 end
 
-
-
 select AccountEmail
 from [Owner]
 where AccountEmail = @userSupliedEmailAddress
+*/
 
+declare @AccountEmail VARCHAR(50);
+declare @AccountPassword VARCHAR(50)
 
+set @AccountEmail = 'john@test.com'
+set @AccountPassword = 'johnpassword'
 
+select case when exists 
+(select [Owner].AccountEmail from [Owner]
+where @AccountEmail = @AccountEmail AND AccountPassword = @AccountPassword)
+then (select OwnerID from Owner where AccountEmail = @AccountEmail AND AccountPassword = @AccountPassword)
+else (0)
+end;
