@@ -8,8 +8,8 @@ class LoginComponent extends HTMLElement
         super();
         this.innerHTML =
         `<div id="login-component-container">
-            <input id="loginAccountEmail" placeholder="Account Email" maxlength="50" required></input>
-            <input id="loginAccountPassword" placeholder="Password" maxlength="50" required></input>
+            <input id="loginAccountEmail" class="login-component-item" placeholder="Account Email" maxlength="50" required></input>
+            <input id="loginAccountPassword" class="login-component-item" placeholder="Password" maxlength="50" required></input>
             <button id="btnLogin">Login</button>
         </div>
         ` 

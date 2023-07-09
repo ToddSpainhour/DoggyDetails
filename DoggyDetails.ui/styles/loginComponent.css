@@ -1,0 +1,26 @@
+@import './_variables.css';
+
+#login-component-container {
+    background-color: var(--dark-blue);
+    display: flex;
+    justify-content: end;
+    padding: 2% 2% 2% 2%;
+    border-bottom: 3px solid var(--light-blue)
+}
+
+.login-component-item {
+    margin: 0 10px 0 10px;
+}
+
+input {
+    color: var(--whiteish);
+    background-color: var(--light-blue);
+    border-style: none;
+    padding: 3px;
+    border-radius: 20px;
+}
+
+::placeholder {
+    color: var(--dark-blue);
+    text-align: center;
+}

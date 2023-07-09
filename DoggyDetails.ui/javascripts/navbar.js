@@ -7,7 +7,7 @@ class NavBar extends HTMLElement
         this.innerHTML = 
         `<nav>
             <div class="logo-container">
-                <h1>Doggy Details</h1>
+                <h1 id="logo-header-text">Doggy Details</h1>
             </div>
             <div class="navbar-elements-container">
                 <div>

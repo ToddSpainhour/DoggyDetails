@@ -8,7 +8,7 @@ import { baseUrl } from './helpers/constants.js'
 
 const checkAuthenticationStatus = async () => 
 {
-    
+    // i think this method is checking for the value before it's there and thinking the user is not authenticated
     const ownerID = await ownerIdData.getOwnerIDCookie();
 
     if(ownerID == null || ownerID == "0" || ownerID == "" || ownerID == undefined)
@@ -52,10 +52,10 @@ const getPetsForThisOwner = async () =>
               },
               body: JSON.stringify(ownerInfo),
         });
+
     
         const listOfPets = await response.text();
         let parsedListOfPets = JSON.parse(listOfPets)
-
         const noPetsInDatabaseMessage = document.getElementById("noPetsInDatabaseMessage")
 
         if(parsedListOfPets.length == 0) 
@@ -82,7 +82,7 @@ const getPetsForThisOwner = async () =>
     } 
     catch (err) 
     {
-        console.log(`oh, no. Something went wrong in the getPetsForThisOwner function. Error Info: ${err.message}`)
+        console.log(`Oh, no. Something went wrong in the getPetsForThisOwner function. Error Info: ${err.message}`)
     }
 }
 
@@ -90,8 +90,8 @@ const init = () =>
 {
     changeCreateAccountButtonVisibility();
     changeLogoutButtonVisibility();
-    checkAuthenticationStatus();
     getPetsForThisOwner();
+    // checkAuthenticationStatus(); // this is causing issues so I'll comment it out for now
 }
 
 init();
