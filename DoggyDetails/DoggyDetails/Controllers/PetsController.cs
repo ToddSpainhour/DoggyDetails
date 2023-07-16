@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DoggyDetails.Models;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DoggyDetails.Controllers
 {
@@ -7,6 +10,11 @@ namespace DoggyDetails.Controllers
     [ApiController]
     public class PetsController : ControllerBase
     {
+        public readonly IConfiguration _configuration;
+        public PetsController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         [HttpGet]
         [Route("getPet/{petID}")]
@@ -17,9 +25,44 @@ namespace DoggyDetails.Controllers
 
         [HttpPost]
         [Route("createNewPet/{petDetails}")]
-        public void CreateNewPet(string petDetails)
+        public void CreateNewPet([FromBody]Pet petDetails)
         {
-            // do stuff
+            Pet newPet = new Pet();
+
+
+            newPet.OwnerID = petDetails.OwnerID;
+            newPet.Name = petDetails.Name;
+            newPet.Type = petDetails.Type;
+
+            using var con = new SqlConnection(_configuration.GetConnectionString("DoggyDetailsConnectionString").ToString());
+
+            try
+            {
+                var queryString = @"insert into Pet
+                                    values (@OwnerID, @Name, @Type);";
+
+                var command = new SqlCommand(queryString, con);
+
+                var ownerID = new SqlParameter("@OwnerID", newPet.OwnerID);
+                var name = new SqlParameter("@Name", newPet.Name);
+                var type = new SqlParameter("Type", newPet.Type);
+
+                command.Parameters.Add(ownerID);
+                command.Parameters.Add(name);
+                command.Parameters.Add(type);
+
+                con.Open();
+                var returnefValue = command.ExecuteNonQuery();
+                con.Close();
+
+                //return returnefValue;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Oh, no! SOmething went wrong in the CreateNewet method! Error Info: {ex}");
+                throw;
+            }
         }
 
         [HttpPut]

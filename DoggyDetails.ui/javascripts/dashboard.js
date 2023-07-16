@@ -86,11 +86,51 @@ const getPetsForThisOwner = async () =>
     }
 }
 
+const submitNewPet = async () => {
+    console.log("do the thing")
+
+    const userEnteredPetName = document.getElementById('user-entered-pet-name').value
+    const userEnteredPetType = document.getElementById('user-entered-pet-type').value
+    const _ownerID = await ownerIdData.getOwnerIDCookie();
+    console.log("_ownerID: ", _ownerID)
+
+    const petDetails = {
+        ownerID: _ownerID,
+        name: userEnteredPetName,
+        type: userEnteredPetType
+    }
+
+    try
+    {
+        const response = await fetch(`${baseUrl}/Pets/createNewPet/${petDetails}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(petDetails),
+        });
+        console.log(response)
+        const result = await response.text();
+        console.log(result)
+
+    } 
+    catch (err)
+    {
+        console.log("oh, no! SOmething went wrong in submitNewPet")
+    }
+}
+
+const addClickEvents = () => {
+    const btnSubmitNewPet = document.getElementById("btnSubmitNewPet")
+    btnSubmitNewPet.addEventListener("click", submitNewPet)
+}
+
 const init = () => 
 {
     changeCreateAccountButtonVisibility();
     changeLogoutButtonVisibility();
     getPetsForThisOwner();
+    addClickEvents();
     // checkAuthenticationStatus(); // this is causing issues so I'll comment it out for now
 }
 
