@@ -3,7 +3,7 @@ p {
 }
 
 .pet-card {
-    width: 50%;
+    width: 30%;
     background-color: var(--light);
     color: var(--dark-blue);
     box-shadow: 1px 1px 7px var(--dark);
