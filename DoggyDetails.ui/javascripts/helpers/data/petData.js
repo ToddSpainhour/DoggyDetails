@@ -1,3 +1,4 @@
+import { baseUrl } from '../constants.js'
 
 const getPet = async (petID) =>
 {
@@ -6,7 +7,22 @@ const getPet = async (petID) =>
 
 const createNewPet = async (petDetails) =>
 {
-    // hit createNewPet endpoint
+    try
+    {
+        console.log("inside try of createNewPet in petData.js")
+        const response = await fetch(`${baseUrl}/Pets/createNewPet/${petDetails}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(petDetails),
+        });
+        console.log("response: " + response)
+    } 
+    catch (err)
+    {
+        console.log("Oh, no! Something went wrong in submitNewPet" + err)
+    }
 }
 
 const editPet = async (petDetails) =>
@@ -17,6 +33,21 @@ const editPet = async (petDetails) =>
 const deletePet = (petID) =>
 {
     // hit deletePet endpoint
+    try 
+    {
+        fetch(`${baseUrl}/Pets/delete/${petID}`, 
+        {
+            method: "DELETE",
+            headers: 
+            {
+                "Content-Type": "application/json",
+            },
+        })
+    } 
+    catch (err) 
+    {
+        console.log("Oh, no! Something went wrong in the deletePet function in petData.js. Error Info: " + err)
+    }
 }
 
 export default { getPet, createNewPet, editPet, deletePet }

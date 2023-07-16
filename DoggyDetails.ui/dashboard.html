@@ -14,6 +14,21 @@
 <body>
     <nav-bar></nav-bar>
     <p>dashboard for authenticated users</p>
+    <div>
+        <div>
+            <button id="btnAddNewPet">Add New Pet</button>
+        </div>
+        <div id="add-new-pet-form-container">
+            <label for="user-entered-pet-name">Pet Name: </label>
+            <input id="user-entered-pet-name" placeholder="pet name" maxlength="50"></input>
+
+            <label for="user-entered-pet-type">Pet Type: </label>
+            <input id="user-entered-pet-type" placeholder="pet type (ie.dog, cat, ect.)" maxlength="50"></input>
+
+            <button id="btnSubmitNewPet">Submit</button>
+            <button id="btnCloseCreateNewPetForm">Cancel</button>
+        </div>
+    </div>
     <div id="petCardsContainer">
         <p id="noPetsInDatabaseMessage" class="error-message">You Have no pets in the database!</p>
     </div>

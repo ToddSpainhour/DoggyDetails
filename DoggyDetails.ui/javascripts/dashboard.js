@@ -53,9 +53,9 @@ const getPetsForThisOwner = async () =>
               body: JSON.stringify(ownerInfo),
         });
 
-    
         const listOfPets = await response.text();
-        let parsedListOfPets = JSON.parse(listOfPets)
+        const parsedListOfPets = JSON.parse(listOfPets)
+
         const noPetsInDatabaseMessage = document.getElementById("noPetsInDatabaseMessage")
 
         if(parsedListOfPets.length == 0) 
@@ -64,19 +64,29 @@ const getPetsForThisOwner = async () =>
         } 
         else 
         {
+            let petCardsContainer = document.getElementById("petCardsContainer");
             noPetsInDatabaseMessage.style.display = "none"
+            let singlePetCard = ""
 
             for (let i = 0; i < parsedListOfPets.length; i++)
             {
-                let petCardsContainer = document.getElementById("petCardsContainer");
-    
-                let singlePetCard = `<div class="pet-card">`
-                singlePetCard += `<p>${parsedListOfPets[i].name}</p>`
-                singlePetCard += `<p>${parsedListOfPets[i].type}</p>`
+                singlePetCard += `<div class="pet-card" id=${parsedListOfPets[i].petID}>`
+                singlePetCard += `<p>Name: ${parsedListOfPets[i].name}</p>`
+                singlePetCard += `<p>Type: ${parsedListOfPets[i].type}</p>`
                 singlePetCard += `<p>PetID: ${parsedListOfPets[i].petID}</p>`
+                singlePetCard += `<div>`
+                singlePetCard += `<button id="btnEditThisPet">edit</button>`
+                singlePetCard += `<button class="btnDeleteThisPet">delete</button>`
                 singlePetCard += `</div>`
-    
-                petCardsContainer.innerHTML += singlePetCard;
+                singlePetCard += `</div>`
+
+            }
+            petCardsContainer.innerHTML = singlePetCard;
+            const deleteThisPetButtonCollection = document.querySelectorAll(".btnDeleteThisPet")
+
+            for(let i = 0; i < deleteThisPetButtonCollection.length; i++)
+            {
+                deleteThisPetButtonCollection[i].addEventListener('click', deleteThisPet)
             }
         }
     } 
@@ -86,11 +96,69 @@ const getPetsForThisOwner = async () =>
     }
 }
 
+const openAddNewPetForm = () => 
+{
+    // make form visable
+    const addNewPetFormContainer = document.getElementById('add-new-pet-form-container')
+    addNewPetFormContainer.style.display = "block"
+
+    // make this btn hidden
+    const btnAddNewPet = document.getElementById('btnAddNewPet')
+    btnAddNewPet.style.display = "none"
+    
+}
+
+const closeCreateNewPetForm = () => {
+    const addNewPetFormContainer = document.getElementById('add-new-pet-form-container')
+    addNewPetFormContainer.style.display = "none"
+
+    const btnAddNewPet = document.getElementById('btnAddNewPet')
+    btnAddNewPet.style.display = "block"
+}
+
+const submitNewPet = async () => 
+{
+    const userEnteredPetName = document.getElementById('user-entered-pet-name').value
+    const userEnteredPetType = document.getElementById('user-entered-pet-type').value
+    const _ownerID = await ownerIdData.getOwnerIDCookie();
+    console.log("_ownerID: ", _ownerID)
+
+    const petDetails = {
+        ownerID: _ownerID,
+        name: userEnteredPetName,
+        type: userEnteredPetType
+    }
+
+    petData.createNewPet(petDetails)
+    location.reload()
+}
+
+const deleteThisPet = (e) => 
+{ 
+    const petCardID = e.target.closest('.pet-card').id;
+    console.log("you want to delete card... " + petCardID)
+    petData.deletePet(petCardID)
+    location.reload()
+}
+
+const addClickEvents = () => 
+{
+    const btnAddNewPet = document.getElementById('btnAddNewPet')
+    btnAddNewPet.addEventListener("click", openAddNewPetForm)
+
+    const btnCloseCreateNewPetForm = document.getElementById('btnCloseCreateNewPetForm')
+    btnCloseCreateNewPetForm.addEventListener("click", closeCreateNewPetForm)
+
+    const btnSubmitNewPet = document.getElementById("btnSubmitNewPet")
+    btnSubmitNewPet.addEventListener("click", submitNewPet)
+}
+
 const init = () => 
 {
     changeCreateAccountButtonVisibility();
     changeLogoutButtonVisibility();
     getPetsForThisOwner();
+    addClickEvents();
     // checkAuthenticationStatus(); // this is causing issues so I'll comment it out for now
 }
 
