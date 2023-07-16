@@ -120,22 +120,8 @@ const submitNewPet = async () =>
         type: userEnteredPetType
     }
 
-    try
-    {
-        const response = await fetch(`${baseUrl}/Pets/createNewPet/${petDetails}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(petDetails),
-        });
-        console.log("response: " + response)
-        location.reload()
-    } 
-    catch (err)
-    {
-        console.log("Oh, no! Something went wrong in submitNewPet")
-    }
+    petData.createNewPet(petDetails)
+    location.reload()
 }
 
 const addClickEvents = () => 
