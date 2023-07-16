@@ -53,9 +53,9 @@ const getPetsForThisOwner = async () =>
               body: JSON.stringify(ownerInfo),
         });
 
-    
         const listOfPets = await response.text();
-        let parsedListOfPets = JSON.parse(listOfPets)
+        const parsedListOfPets = JSON.parse(listOfPets)
+
         const noPetsInDatabaseMessage = document.getElementById("noPetsInDatabaseMessage")
 
         if(parsedListOfPets.length == 0) 
@@ -64,20 +64,19 @@ const getPetsForThisOwner = async () =>
         } 
         else 
         {
+            let petCardsContainer = document.getElementById("petCardsContainer");
             noPetsInDatabaseMessage.style.display = "none"
+            let singlePetCard = ""
 
             for (let i = 0; i < parsedListOfPets.length; i++)
             {
-                let petCardsContainer = document.getElementById("petCardsContainer");
-    
-                let singlePetCard = `<div class="pet-card">`
+                singlePetCard += `<div class="pet-card">`
                 singlePetCard += `<p>${parsedListOfPets[i].name}</p>`
                 singlePetCard += `<p>${parsedListOfPets[i].type}</p>`
                 singlePetCard += `<p>PetID: ${parsedListOfPets[i].petID}</p>`
                 singlePetCard += `</div>`
-    
-                petCardsContainer.innerHTML += singlePetCard;
             }
+            petCardsContainer.innerHTML = singlePetCard;
         }
     } 
     catch (err) 
@@ -86,9 +85,30 @@ const getPetsForThisOwner = async () =>
     }
 }
 
-const submitNewPet = async () => {
-    console.log("do the thing")
+const openAddNewPetForm = () => 
+{
+    // make form visable
+    const addNewPetFormContainer = document.getElementById('add-new-pet-form-container')
+    addNewPetFormContainer.style.display = "block"
 
+    // make this btn hidden
+    const btnAddNewPet = document.getElementById('btnAddNewPet')
+    btnAddNewPet.style.display = "none"
+    
+}
+
+const closeCreateNewPetForm = () => {
+    const addNewPetFormContainer = document.getElementById('add-new-pet-form-container')
+    addNewPetFormContainer.style.display = "none"
+
+    const btnAddNewPet = document.getElementById('btnAddNewPet')
+    btnAddNewPet.style.display = "block"
+}
+
+
+
+const submitNewPet = async () => 
+{
     const userEnteredPetName = document.getElementById('user-entered-pet-name').value
     const userEnteredPetType = document.getElementById('user-entered-pet-type').value
     const _ownerID = await ownerIdData.getOwnerIDCookie();
@@ -109,18 +129,23 @@ const submitNewPet = async () => {
             },
             body: JSON.stringify(petDetails),
         });
-        console.log(response)
-        const result = await response.text();
-        console.log(result)
-
+        console.log("response: " + response)
+        location.reload()
     } 
     catch (err)
     {
-        console.log("oh, no! SOmething went wrong in submitNewPet")
+        console.log("Oh, no! Something went wrong in submitNewPet")
     }
 }
 
-const addClickEvents = () => {
+const addClickEvents = () => 
+{
+    const btnAddNewPet = document.getElementById('btnAddNewPet')
+    btnAddNewPet.addEventListener("click", openAddNewPetForm)
+
+    const btnCloseCreateNewPetForm = document.getElementById('btnCloseCreateNewPetForm')
+    btnCloseCreateNewPetForm.addEventListener("click", closeCreateNewPetForm)
+
     const btnSubmitNewPet = document.getElementById("btnSubmitNewPet")
     btnSubmitNewPet.addEventListener("click", submitNewPet)
 }
