@@ -33,6 +33,21 @@ const editPet = async (petDetails) =>
 const deletePet = (petID) =>
 {
     // hit deletePet endpoint
+    try 
+    {
+        fetch(`${baseUrl}/Pets/delete/${petID}`, 
+        {
+            method: "DELETE",
+            headers: 
+            {
+                "Content-Type": "application/json",
+            },
+        })
+    } 
+    catch (err) 
+    {
+        console.log("Oh, no! Something went wrong in the deletePet function in petData.js. Error Info: " + err)
+    }
 }
 
 export default { getPet, createNewPet, editPet, deletePet }

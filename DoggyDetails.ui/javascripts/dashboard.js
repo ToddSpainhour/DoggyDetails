@@ -70,13 +70,24 @@ const getPetsForThisOwner = async () =>
 
             for (let i = 0; i < parsedListOfPets.length; i++)
             {
-                singlePetCard += `<div class="pet-card">`
-                singlePetCard += `<p>${parsedListOfPets[i].name}</p>`
-                singlePetCard += `<p>${parsedListOfPets[i].type}</p>`
+                singlePetCard += `<div class="pet-card" id=${parsedListOfPets[i].petID}>`
+                singlePetCard += `<p>Name: ${parsedListOfPets[i].name}</p>`
+                singlePetCard += `<p>Type: ${parsedListOfPets[i].type}</p>`
                 singlePetCard += `<p>PetID: ${parsedListOfPets[i].petID}</p>`
+                singlePetCard += `<div>`
+                singlePetCard += `<button id="btnEditThisPet">edit</button>`
+                singlePetCard += `<button class="btnDeleteThisPet">delete</button>`
                 singlePetCard += `</div>`
+                singlePetCard += `</div>`
+
             }
             petCardsContainer.innerHTML = singlePetCard;
+            const deleteThisPetButtonCollection = document.querySelectorAll(".btnDeleteThisPet")
+
+            for(let i = 0; i < deleteThisPetButtonCollection.length; i++)
+            {
+                deleteThisPetButtonCollection[i].addEventListener('click', deleteThisPet)
+            }
         }
     } 
     catch (err) 
@@ -105,8 +116,6 @@ const closeCreateNewPetForm = () => {
     btnAddNewPet.style.display = "block"
 }
 
-
-
 const submitNewPet = async () => 
 {
     const userEnteredPetName = document.getElementById('user-entered-pet-name').value
@@ -121,6 +130,14 @@ const submitNewPet = async () =>
     }
 
     petData.createNewPet(petDetails)
+    location.reload()
+}
+
+const deleteThisPet = (e) => 
+{ 
+    const petCardID = e.target.closest('.pet-card').id;
+    console.log("you want to delete card... " + petCardID)
+    petData.deletePet(petCardID)
     location.reload()
 }
 

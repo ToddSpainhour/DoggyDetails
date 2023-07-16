@@ -77,6 +77,28 @@ namespace DoggyDetails.Controllers
         public void DeletePet(int petID)
         {
             // do stuff
+
+            var petToDelete = petID;
+            using var con = new SqlConnection(_configuration.GetConnectionString("DoggyDetailsConnectionString").ToString());
+
+            try
+            {
+                var queryString = @"delete from Pet" +
+                    "               where PetID = @PetID;";
+
+                var command = new SqlCommand(queryString, con);
+                var petIDToDelete = new SqlParameter("@PetID", petToDelete);
+                command.Parameters.Add(petIDToDelete);
+
+                con.Open();
+                command.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Oh, no! SOmething went wrong in the DeletePet method. Error Info: {ex}");
+                throw;
+            }
         }
     }
 }
