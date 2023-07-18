@@ -1,18 +1,17 @@
 // should this be in the navbar component??
 const getOwnerIDCookie = () => 
 {
-        let OwnerIDFromCookies = ''
-        document.cookie.split(';').forEach((e)=>
+        let OwnerIDFromCookies = "";
+        const cookieArray = document.cookie.split(';');
+
+        for (let i = 0; i < cookieArray.length; i++)
         {
-           if(e.includes("OwnerID")) 
-           {
-            OwnerIDFromCookies = e.split('=')[1]
-           } 
-           else 
-           {
-            OwnerIDFromCookies = "0"
-           }
-        })
+            if(cookieArray[i].includes("OwnerID")) 
+            {
+                OwnerIDFromCookies = cookieArray[i].split('=')[1];
+                break;
+            } 
+        }
     return OwnerIDFromCookies; 
 }
 
