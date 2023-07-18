@@ -9,7 +9,6 @@ const createNewPet = async (petDetails) =>
 {
     try
     {
-        console.log("inside try of createNewPet in petData.js")
         const response = await fetch(`${baseUrl}/Pets/createNewPet/${petDetails}`, {
             method: "POST",
             headers: {
@@ -17,7 +16,6 @@ const createNewPet = async (petDetails) =>
             },
             body: JSON.stringify(petDetails),
         });
-        console.log("response: " + response)
     } 
     catch (err)
     {

@@ -121,7 +121,6 @@ const submitNewPet = async () =>
     const userEnteredPetName = document.getElementById('user-entered-pet-name').value
     const userEnteredPetType = document.getElementById('user-entered-pet-type').value
     const _ownerID = await ownerIdData.getOwnerIDCookie();
-    console.log("_ownerID: ", _ownerID)
 
     const petDetails = {
         ownerID: _ownerID,
@@ -129,14 +128,13 @@ const submitNewPet = async () =>
         type: userEnteredPetType
     }
 
-    petData.createNewPet(petDetails)
+    await petData.createNewPet(petDetails)
     location.reload()
 }
 
 const deleteThisPet = (e) => 
 { 
     const petCardID = e.target.closest('.pet-card').id;
-    console.log("you want to delete card... " + petCardID)
     petData.deletePet(petCardID)
     location.reload()
 }
