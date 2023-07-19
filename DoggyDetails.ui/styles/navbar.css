@@ -20,12 +20,27 @@ a {
     font-weight: 700;
 }
 
+svg {
+    fill: pink;
+}
+
 .logo-container {
-    width: 50%;
+    width: 75%;
+    padding: .5rem 0 0 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#dog-logo {
+    height:100px;
+    fill: red;
+    padding: 1rem .5rem 1rem 2rem
 }
 
 #logo-header-text {
-    padding: 10px 50px 10px 50px;
+    width:fit-content;
+    padding: 10px 50px 10px 0;
 }
 
 .navbar-elements-container {
@@ -45,4 +60,10 @@ a {
 
 #logout-button-container {
     display: none;
+}
+
+#btnLogout {
+    padding: 5px;
+    color: var(--dark-blue);
+    font-weight: 600;
 }
