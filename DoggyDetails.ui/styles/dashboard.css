@@ -1,3 +1,9 @@
+
+#your-dashboard-header {
+ padding: 10px 0 10px 10px;
+ text-align: center;
+}
+
 #petCardsContainer {
     display: flex;
     flex-direction: row;
@@ -8,4 +14,35 @@
 
 #add-new-pet-form-container {
     display: none;
+}
+
+#btnAddNewPet{
+    margin-right: 25px;
+}
+
+#plus-icon {
+    height: 25px;
+}
+
+#add-new-button-container {
+    display: flex;
+    justify-content: end;
+}
+
+.pet-card-icons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.pet-card-name{
+    text-align: center;
+}
+
+.btnDeleteThisPet {
+    background-color: transparent;
+}
+
+.btnDeleteThisPet:hover {
+    background-color: var(--whiteish);
 }

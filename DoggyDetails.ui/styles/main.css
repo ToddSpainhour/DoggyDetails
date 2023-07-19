@@ -20,6 +20,10 @@ main {
     padding: 5%;
 }
 
+h3 {
+    color: var(--dark-blue)
+}
+
 button {
     background-color: var(--yellow);
     padding: 10px;

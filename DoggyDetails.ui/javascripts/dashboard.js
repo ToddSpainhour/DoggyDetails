@@ -71,12 +71,11 @@ const getPetsForThisOwner = async () =>
             for (let i = 0; i < parsedListOfPets.length; i++)
             {
                 singlePetCard += `<div class="pet-card" id=${parsedListOfPets[i].petID}>`
-                singlePetCard += `<p>Name: ${parsedListOfPets[i].name}</p>`
+                singlePetCard += `<h3 class="pet-card-name">${parsedListOfPets[i].name}</h3>`
                 singlePetCard += `<p>Type: ${parsedListOfPets[i].type}</p>`
                 singlePetCard += `<p>PetID: ${parsedListOfPets[i].petID}</p>`
-                singlePetCard += `<div>`
-                singlePetCard += `<button id="btnEditThisPet">edit</button>`
-                singlePetCard += `<button class="btnDeleteThisPet">delete</button>`
+                singlePetCard += `<div class="pet-card-icons-container">`
+                singlePetCard += `<button class="btnDeleteThisPet"><img src="./images/trash-can.svg" /></button>`
                 singlePetCard += `</div>`
                 singlePetCard += `</div>`
 
