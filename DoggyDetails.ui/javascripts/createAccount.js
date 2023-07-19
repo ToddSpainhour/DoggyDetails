@@ -13,7 +13,7 @@ const changeUsernameUnavailableVisability = (dbResponse) =>
     } 
     else 
     {
-        usernameAlreadyTakenMessage.innerHTML = "Great, that Account Email is available for you to use! Let's keep going!"
+        usernameAlreadyTakenMessage.innerHTML = "Great! That Account Email is available for you to use! Let's keep going!"
         createAccountInputContainer.style.display = "block";
     }
 }
