@@ -15,8 +15,8 @@ update [Owner]
 set AccountEmail = 'cindy@test.com'
 where OwnerId = 1
 
-delete from [Owner]
-where OwnerID between 33 and 33
+delete from pet
+where PetID between 37 and 50
 
 select *
 from Pet
